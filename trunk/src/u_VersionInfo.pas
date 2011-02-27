@@ -90,10 +90,10 @@ type
 implementation
 
 uses
-  RegExpr,
   StrUtils,
   DateUtils,
   IniFiles,
+  RegularExpressions,
   u_dzStringUtils,
   u_dzDateUtils;
 
@@ -165,32 +165,26 @@ end;
 
 function TVersionInfo.ResolveVariables(const _s: string): string;
 var
-  re: TRegExpr;
-  Found: Boolean;
+  re: TRegEx;
+  Match: TMatch;
   s: string;
   Start: Integer;
   Ende: integer;
 begin
   Result := '';
   Start := 1;
-  re := TRegExpr.Create;
-  try
-    re.Expression := '\{(.*?)\}';
-    re.Compile;
-    Found := re.Exec(_s);
-    while Found do begin
-      Ende := re.MatchPos[0];
-      Result := Result + Copy(_s, Start, Ende - Start);
-      Start := Ende + re.MatchLen[0];
-      s := re.Match[1];
-      s := ResolveVariable(s);
-      Result := Result + s;
-      Found := re.ExecNext;
-    end;
-    Result := Result + TailStr(_s, Start);
-  finally
-    re.Free;
+  re.Create('\{(.*?)\}');
+  Match := re.Match(_s);
+  while Match.Success do begin
+    Ende := Match.Index;
+    Result := Result + Copy(_s, Start, Ende - Start);
+    Start := Ende + Match.Length;
+    s := Match.Value;
+    s := ResolveVariable(s);
+    Result := Result + s;
+    Match := Match.NextMatch;
   end;
+  Result := Result + TailStr(_s, Start);
 end;
 
 function TVersionInfo.GetAutoIncBuild: boolean;
