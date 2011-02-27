@@ -19,7 +19,6 @@ uses
   ExtCtrls,
   CheckLst,
   StdCtrls,
-  ExtCtrls,
   Grids,
   DbGrids,
   Buttons,
@@ -620,7 +619,6 @@ implementation
 
 uses
   Menus, // for StripHotKey function
-  Messages,
   Consts,
   JPEG,
   StrUtils,

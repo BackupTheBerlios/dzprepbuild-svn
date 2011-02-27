@@ -968,7 +968,7 @@ type
 var
   DriveBits: set of 0..25;
   DriveNum: Integer;
-  DriveChar: Char;
+  DriveChar: AnsiChar;
   DriveType: TDriveType;
   s: string;
 begin
@@ -976,7 +976,7 @@ begin
   for DriveNum := 0 to 25 do begin
     if not (DriveNum in DriveBits) then
       Continue;
-    DriveChar := Char(DriveNum + Ord('a'));
+    DriveChar := AnsiChar(DriveNum + Ord('a'));
     DriveType := TDriveType(Windows.GetDriveType(PChar(DriveChar + ':\')));
     if not _HdOnly or (DriveType = dtFixed) then begin
       s := GetVolumeName(DriveChar);
