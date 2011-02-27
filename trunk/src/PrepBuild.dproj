@@ -147,5 +147,6 @@
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<PropertyGroup>
 			<PreBuildEvent><![CDATA[..\buildtools\prebuild.cmd $(PROJECTPATH)]]></PreBuildEvent>
+			<PostBuildEvent><![CDATA[..\buildtools\postbuild.cmd $(OUTPUTDIR)$(OUTPUTNAME)]]></PostBuildEvent>
 		</PropertyGroup>
 	</Project>
