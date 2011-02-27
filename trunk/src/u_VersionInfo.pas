@@ -175,11 +175,11 @@ begin
   Start := 1;
   re.Create('\{(.*?)\}');
   Match := re.Match(_s);
-  while Match.Success do begin
+  while Match.Success and (Match.Groups.Count > 1) do begin
     Ende := Match.Index;
     Result := Result + Copy(_s, Start, Ende - Start);
     Start := Ende + Match.Length;
-    s := Match.Value;
+    s := Match.Groups[1].Value;
     s := ResolveVariable(s);
     Result := Result + s;
     Match := Match.NextMatch;
