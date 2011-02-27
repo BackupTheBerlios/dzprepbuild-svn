@@ -38,7 +38,7 @@ rem Pfad extrahieren
 set directory=%~p1%
 rem backslash (=letztes Zeichen)  entfernen
 set directory=%directory:~0,-1%
-rem "Dateienamen" (= letztes Verzeichnis des Pfades) extrahieren
+rem "Dateinamen" (= letztes Verzeichnis des Pfades) extrahieren
 call :LastItem %directory%
 goto :eof
 
